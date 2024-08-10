@@ -7,13 +7,21 @@
 
 import UIKit
 
-class ViewController: UIViewController {
 
+class ViewController: UIViewController {
+    
+    @IBOutlet weak var lunaImageView: UIImageView!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var appNameLabel: UILabel!
+    @IBOutlet weak var userSurnameTextField: UITextField!
+    @IBOutlet weak var signUpButton: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
-
-
+    
+    @IBAction func signUpClicked(_ sender: Any) {
+    }
 }
-
