@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3A459ECA2C6778D0007F7656 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A459EC92C6778D0007F7656 /* MainViewController.swift */; };
+		3A459ED62C679CC4007F7656 /* ModelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A459ED52C679CC4007F7656 /* ModelViewController.swift */; };
+		3A459ED82C679CEE007F7656 /* ControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A459ED72C679CEE007F7656 /* ControllerViewController.swift */; };
 		3AFDE0F32C5C025700753C9F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDE0F22C5C025700753C9F /* AppDelegate.swift */; };
 		3AFDE0F52C5C025700753C9F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDE0F42C5C025700753C9F /* SceneDelegate.swift */; };
 		3AFDE0F72C5C025700753C9F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFDE0F62C5C025700753C9F /* ViewController.swift */; };
@@ -18,7 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3A459EC92C6778D0007F7656 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		3A459ED52C679CC4007F7656 /* ModelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelViewController.swift; sourceTree = "<group>"; };
+		3A459ED72C679CEE007F7656 /* ControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerViewController.swift; sourceTree = "<group>"; };
 		3AFDE0EF2C5C025700753C9F /* LunarGapCalendar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunarGapCalendar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3AFDE0F22C5C025700753C9F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3AFDE0F42C5C025700753C9F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3A459ECD2C679BBD007F7656 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3A459ED52C679CC4007F7656 /* ModelViewController.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		3A459ECE2C679BC7007F7656 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				3AFDE0F62C5C025700753C9F /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		3A459ECF2C679BD2007F7656 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				3A459ED72C679CEE007F7656 /* ControllerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		3AFDE0E62C5C025700753C9F = {
 			isa = PBXGroup;
 			children = (
@@ -60,10 +86,11 @@
 		3AFDE0F12C5C025700753C9F /* LunarGapCalendar */ = {
 			isa = PBXGroup;
 			children = (
+				3A459ECD2C679BBD007F7656 /* Model */,
+				3A459ECE2C679BC7007F7656 /* View */,
+				3A459ECF2C679BD2007F7656 /* Controller */,
 				3AFDE0F22C5C025700753C9F /* AppDelegate.swift */,
 				3AFDE0F42C5C025700753C9F /* SceneDelegate.swift */,
-				3AFDE0F62C5C025700753C9F /* ViewController.swift */,
-				3A459EC92C6778D0007F7656 /* MainViewController.swift */,
 				3AFDE0F82C5C025700753C9F /* Main.storyboard */,
 				3AFDE0FE2C5C025900753C9F /* Assets.xcassets */,
 				3AFDE1002C5C025900753C9F /* LaunchScreen.storyboard */,
@@ -148,7 +175,8 @@
 				3AFDE0FD2C5C025700753C9F /* LunarGapCalendar.xcdatamodeld in Sources */,
 				3AFDE0F32C5C025700753C9F /* AppDelegate.swift in Sources */,
 				3AFDE0F52C5C025700753C9F /* SceneDelegate.swift in Sources */,
-				3A459ECA2C6778D0007F7656 /* MainViewController.swift in Sources */,
+				3A459ED82C679CEE007F7656 /* ControllerViewController.swift in Sources */,
+				3A459ED62C679CC4007F7656 /* ModelViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
