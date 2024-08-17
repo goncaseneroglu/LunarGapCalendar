@@ -14,6 +14,7 @@ class ControllerViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var countdownLabel: UILabel!
     private var voidOfMoonTimes: [LunarSpace] = []
+    var timer: Timer?
 
 override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,7 +31,46 @@ override func viewDidLoad() {
     
     // Belirli aralıklarla otomatik kontrol için zamanlayıcı
     Timer.scheduledTimer(timeInterval: 5.0 , target: self, selector: #selector(updateStatusLabel), userInfo: nil, repeats: true)
+    
+    timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateCountdown), userInfo: nil, repeats: true)
+    
 }
+    
+    @objc private func updateCountdown() {
+            let now = Date()
+            
+            for time in voidOfMoonTimes {
+                if time.start <= now && now <= time.end {
+                    let remainingTime = time.end.timeIntervalSince(now)
+                    titleLabel.text = "Ay boşlukta"
+                    timeZoneLabel.text = "\(formatDateTimeZone(time.start)) - \(formatDateTimeZone(time.end))"
+                    countdownLabel.text = formatTimeInterval(remainingTime)
+                    return
+                }
+            }
+            
+            // Eğer ay boşlukta değilse
+            titleLabel.text = "Şu anda ay boşlukta değil."
+            countdownLabel.text = ""
+        }
+    
+        private func formatDateTimeZone(_ date: Date) -> String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "dd.MM HH:mm"
+            return formatter.string(from: date)
+        }
+      
+        private func formatTimeInterval(_ interval: TimeInterval) -> String {
+            let hours = Int(interval) / 3600
+            let minutes = (Int(interval) % 3600) / 60
+            let seconds = Int(interval) % 60
+            return String(format: "%02d:%02d:%02d", hours, minutes, seconds)
+        }
+
+        deinit {
+            // Timer'ı temizle
+            timer?.invalidate()
+        }
 
 private func setupUI() {
    titleLabel.text = "Şu anda ay boşlukta değil."
@@ -41,6 +81,7 @@ private func loadVoidOfMoonTimes() {
     formatter.dateFormat = "yyyy-MM-dd HH:mm"
     
     let lunarSpaceTimeZone = [
+        ("2024-08-17 12:00", "2024-08-17 17:00"),
         ("2024-08-13 12:00", "2024-08-13 13:00"),
         ("2024-08-15 19:52", "2024-08-15 20:51"),
         ("2024-08-17 23:43", "2024-08-18 00:44"),
@@ -117,15 +158,13 @@ private func loadVoidOfMoonTimes() {
     let now = Date()
     var labelText = "Şu anda ay boşlukta değil."
            
-           // Void of Moon Times'ı kontrol et
            for time in voidOfMoonTimes {
                if time.start <= now && now <= time.end {
-                   labelText = "Ay boşlukta: \(formatDate(time.start)) - \(formatDate(time.end))"
+                   labelText = "Ay boşlukta"
                    break
                }
            }
            
-           // UI güncellemesi ana iş parçacığında yapılmalı
            DispatchQueue.main.async {
                self.titleLabel.text = labelText
            }
@@ -149,24 +188,39 @@ private func requestNotificationAuthorization() {
     }
 }
 
-private func scheduleNotifications() {
-    let notificationCenter = UNUserNotificationCenter.current()
-    
-    for time in voidOfMoonTimes {
-        let content = UNMutableNotificationContent()
-        content.title = "Ay Boşlukta"
-        content.body = "Ayın boşlukta olduğu zaman dilimindesiniz. Dikkatli olun!"
-        content.sound = .default
+    private func scheduleNotifications() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        let now = Date()
         
-        let triggerStart = UNTimeIntervalNotificationTrigger(timeInterval: time.start.timeIntervalSinceNow, repeats: false)
-        let requestStart = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: triggerStart)
-        notificationCenter.add(requestStart)
-        
-        let triggerEnd = UNTimeIntervalNotificationTrigger(timeInterval: time.end.timeIntervalSinceNow, repeats: false)
-        let requestEnd = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: triggerEnd)
-        notificationCenter.add(requestEnd)
+        for time in voidOfMoonTimes {
+            let startInterval = time.start.timeIntervalSinceNow
+            let endInterval = time.end.timeIntervalSinceNow
+            
+            // Zaman aralıklarının pozitif olduğundan emin olun
+            if startInterval > 0 {
+                let content = UNMutableNotificationContent()
+                content.title = "Ay Boşlukta"
+                titleLabel.text = content.title
+                content.sound = .default
+                
+                let triggerStart = UNTimeIntervalNotificationTrigger(timeInterval: startInterval, repeats: false)
+                let requestStart = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: triggerStart)
+                notificationCenter.add(requestStart)
+            }
+            
+            if endInterval > 0 {
+                let content = UNMutableNotificationContent()
+                content.title = "Ay Boşlukta"
+                titleLabel.text = content.title
+                content.sound = .default
+                
+                let triggerEnd = UNTimeIntervalNotificationTrigger(timeInterval: endInterval, repeats: false)
+                let requestEnd = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: triggerEnd)
+                notificationCenter.add(requestEnd)
+            }
+        }
     }
-}
+
 }
 
 
