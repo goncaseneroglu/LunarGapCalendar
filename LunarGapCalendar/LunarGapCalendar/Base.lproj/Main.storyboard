@@ -146,6 +146,7 @@
                     <navigationItem key="navigationItem" id="fGb-Hs-w2N"/>
                     <connections>
                         <outlet property="countdownLabel" destination="BK0-yM-8zB" id="2ao-jI-OU5"/>
+                        <outlet property="timeImage" destination="CVe-Ow-CNF" id="hb0-hz-3PQ"/>
                         <outlet property="timeZoneLabel" destination="Iqf-zP-ShI" id="ro5-MA-yhc"/>
                         <outlet property="titleLabel" destination="pxc-2K-i8c" id="rYe-jF-rkI"/>
                     </connections>
@@ -157,8 +158,8 @@
     </scenes>
     <resources>
         <image name="hourglass.circle" catalog="system" width="128" height="123"/>
-        <image name="moon" catalog="system" width="128" height="123"/>
         <image name="moon" width="393" height="759"/>
+        <image name="moon" catalog="system" width="128" height="123"/>
         <image name="square.and.arrow.up.badge.clock" catalog="system" width="117" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

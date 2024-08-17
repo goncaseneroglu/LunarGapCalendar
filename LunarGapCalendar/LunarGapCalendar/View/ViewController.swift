@@ -20,31 +20,34 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        styleMainLabel(appNameLabel, font: UIFont(name: "HelveticaNeue-Bold", size: 24)!, textColor: UIColor.white, textAlignment: .center)
+        styleMainLabel(welcomeUserNameLabel, font: UIFont(name: "HelveticaNeue-Bold", size: 24)!, textColor: UIColor.white, textAlignment: .center)
+        styleMainTextField(userNameTextField, font:UIFont(name: "HelveticaNeue-Bold", size: 24)!, textColor: UIColor.white, textAlignment: .center)
+        styleMainTextField(userSurnameTextField, font:UIFont(name: "HelveticaNeue-Bold", size: 24)!, textColor: UIColor.white, textAlignment: .center)
         if let userName = UserDefaults.standard.string(forKey: "Name"),
            let userSurname = UserDefaults.standard.string(forKey: "Surname") {
-                    userNameTextField.text = userName
-                    userSurnameTextField.text = userSurname
-                    welcomeUserNameLabel.isHidden = false
-                    welcomeUserNameLabel.text = "Hoşgeldin \(userName)"
-                    signInView.isHidden = true
+            userNameTextField.text = userName
+            userSurnameTextField.text = userSurname
+            welcomeUserNameLabel.isHidden = false
+            welcomeUserNameLabel.text = "Hoşgeldin \(userName)"
+            signInView.isHidden = true
         } else {
-                    welcomeUserNameLabel.isHidden = true
-                    userNameTextField.isHidden = true
-                    userSurnameTextField.isHidden = true
-                    
-                }
+            welcomeUserNameLabel.isHidden = true
+            userNameTextField.isHidden = true
+            userSurnameTextField.isHidden = true
+            
+        }
         
         if let _ = UserDefaults.standard.string(forKey: "Name") {
             Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(performSegueSecondView), userInfo: nil, repeats: false)
-                    }
-                }
-
-
-
+        }
+    }
+    
+    
+    
     @objc func performSegueSecondView() {
-                performSegue(withIdentifier: "toSecondVC", sender: self)
-            }
+        performSegue(withIdentifier: "toSecondVC", sender: self)
+    }
     
     @IBAction func signUpClicked(_ sender: Any) {
         let userName = userNameTextField.text ?? ""
@@ -55,14 +58,27 @@ class ViewController: UIViewController {
         
         welcomeUserNameLabel.text = "Hoşgeldin \(userName)"
         welcomeUserNameLabel.isHidden = false
-                
-
+        
+        
         userNameTextField.isHidden = true
         userSurnameTextField.isHidden = true
         
         print("Kullanıcı bilgileri kaydedildi.")
         performSegue(withIdentifier: "toSecondVC", sender: nil)
-       
+        
     }
-
+    
+    func styleMainLabel(_ label: UILabel, font: UIFont, textColor: UIColor, textAlignment: NSTextAlignment) {
+        label.font = font
+        label.textColor = textColor
+        label.textAlignment = textAlignment
+        
+    }
+    
+    func styleMainTextField(_ textField: UITextField, font: UIFont, textColor: UIColor, textAlignment: NSTextAlignment) {
+        textField.font = font
+        textField.textColor = textColor
+        textField.textAlignment = textAlignment
+        
+    }
 }
